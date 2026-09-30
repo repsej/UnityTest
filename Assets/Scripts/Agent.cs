@@ -8,6 +8,8 @@ public class Agent : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
 
+    TrailRenderer trail;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -23,6 +25,12 @@ public class Agent : MonoBehaviour
 
     void Update()
     {
+        if (trail == null)
+        {
+            trail = GetComponentInChildren<TrailRenderer>();
+            trail.Clear();
+        }
+
         ScoreboardController
             .GetInstance()
             .SetScore(Mathf.FloorToInt(navMeshAgent.remainingDistance));
